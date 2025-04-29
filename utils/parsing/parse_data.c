@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 09:32:19 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/29 10:52:32 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:42:22 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_my_data		parse_data(int ac, char **av)
 	t_arg		arg;
 	int			i;
 
-	i = -1;
+	i = 0;
 	data.is_valid = (ac == 5 || ac == 6);
 	data.times_to_eat = -1;
 	while (++i < ac)

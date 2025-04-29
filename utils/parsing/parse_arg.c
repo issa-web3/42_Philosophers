@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:24:42 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/29 10:47:15 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:38:41 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ t_arg			parse_arg(char *str)
 		}
 		i++;
 	}
+	result.valid = str[i] == '\0';
 	return (result);
 }
