@@ -1,32 +1,33 @@
-
-
-
-
 #include <pthread.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-void    *func(void *ptr)
-{
-    int x = *(int *)ptr;
-    int *result = malloc(4);
-    *result = x * x;
-    return (result);
+#define NUM_THREADS 500
+#define NUM_INCREMENTS 100000
+
+int counter = 0;
+pthread_mutex_t lock;
+
+void* increment(void* arg) {
+    for (int i = 0; i < NUM_INCREMENTS; ++i) {
+        pthread_mutex_lock(&lock);
+        counter++;
+        pthread_mutex_unlock(&lock);
+    }
+    return NULL;
 }
 
-int mainn()
-{
-    pthread_t   my_thread;
+int main() {
+    pthread_t threads[NUM_THREADS];
+    pthread_mutex_init(&lock, NULL);
 
-    int x;
-    x = 3;
+    for (int i = 0; i < NUM_THREADS; ++i)
+        pthread_create(&threads[i], NULL, increment, NULL);
 
+    for (int i = 0; i < NUM_THREADS; ++i)
+        pthread_join(threads[i], NULL);
 
-    pthread_create(&my_thread, NULL, func, &x);
+    printf("Final counter value: %d\n", counter);  // Should be exactly 500000
 
-    int *result;
-    pthread_join(my_thread, (void *)(&result));
-
-    printf("%d\n", *result);
-
+    pthread_mutex_destroy(&lock);
+    return 0;
 }

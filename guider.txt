@@ -6,6 +6,17 @@ PLAN:
 parsing plan:
     struct data
     init()
+    done
+
+me ---> DELTA
+
+DELTA:
+    learn thread function
+
+GAMMA:
+    project idea and foundation
+
+TAO & LAMDA
 
 
 

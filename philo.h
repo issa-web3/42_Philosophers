@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/29 10:50:47 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:10:46 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <limits.h>
+#include <sys/time.h>
 
 // Structs
-// number_of_philosophers time_to_die time_to_eat time_to_sleep
-// [number_of_times_each_philosopher_must_eat]
 typedef struct s_my_data
 {
 	/* program args */
