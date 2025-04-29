@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_request.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 14:47:28 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/29 14:03:27 by ioulkhir         ###   ########.fr       */
+/*   Created: 2025/04/29 15:15:59 by ioulkhir          #+#    #+#             */
+/*   Updated: 2025/04/29 15:16:39 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../../philo.h"
 
-int	main(int ac, char **av)
+void	print_request(t_broadcasted_info *info, char *str)
 {
-	t_my_data	data;
-	int			status;
-
-	data = parse_data(ac, av);
-	if (!data.is_valid)
-		return (validation_err());
-	status = start_simulation(data);
-	return (status);
+	
 }

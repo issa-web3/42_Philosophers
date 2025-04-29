@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   what_time_is_it.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 14:47:28 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/29 14:03:27 by ioulkhir         ###   ########.fr       */
+/*   Created: 2024/10/22 08:41:55 by ioulkhir          #+#    #+#             */
+/*   Updated: 2025/04/29 15:10:00 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../../philo.h"
 
-int	main(int ac, char **av)
+int	what_time_is_it()
 {
-	t_my_data	data;
-	int			status;
+	struct timeval tv;
 
-	data = parse_data(ac, av);
-	if (!data.is_valid)
-		return (validation_err());
-	status = start_simulation(data);
-	return (status);
+	if (gettimeofday(&tv, NULL) != 0)
+		return (-1);
+	return (tv.tv_usec);
 }

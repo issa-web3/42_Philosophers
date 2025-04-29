@@ -16,7 +16,7 @@ void* increment(void* arg) {
     return NULL;
 }
 
-int main() {
+int maivn() {
     pthread_t threads[NUM_THREADS];
     pthread_mutex_init(&lock, NULL);
 
