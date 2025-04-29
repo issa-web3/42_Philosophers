@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_data.c                                       :+:      :+:    :+:   */
+/*   parse_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 09:32:19 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/29 10:52:32 by ioulkhir         ###   ########.fr       */
+/*   Created: 2025/04/29 10:24:42 by ioulkhir          #+#    #+#             */
+/*   Updated: 2025/04/29 10:47:15 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
-t_my_data		parse_data(int ac, char **av)
+t_arg			parse_arg(char *str)
 {
-	t_my_data	data;
-	t_arg		arg;
-	int			i;
+	t_arg	result;
+	int		i;
 
-	i = -1;
-	data.is_valid = (ac == 5 || ac == 6);
-	data.times_to_eat = -1;
-	while (++i < ac)
+	i = 0;
+	while (str[i] == ' ' || (9 <= str[i] && str[i] <= 13))
+		i++;
+	if (str[i] == '+')
+		i++;
+	result.val = 0;
+	result.valid = 1;
+	while (ft_isdigit(str[i]))
 	{
-		arg = parse_arg(av[i]);
-		data.is_valid &= arg.valid;
-		((long *)&data.philos_num)[i - 1] = arg.val;
+		result.val *= 10;
+		result.val += str[i] - '0';
+		if (result.val > INT_MAX)
+		{
+			result.valid = 0;
+			break;
+		}
+		i++;
 	}
-	return (data);
+	return (result);
 }

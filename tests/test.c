@@ -14,7 +14,7 @@ void    *func(void *ptr)
     return (result);
 }
 
-int main()
+int mainn()
 {
     pthread_t   my_thread;
 

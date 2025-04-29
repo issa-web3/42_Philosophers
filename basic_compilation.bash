@@ -1,2 +1,2 @@
 $FLAGS = -Wall -Wextra -Werror
-cc $FLAGS *.c */*.c -o philo
+cc $FLAGS *.c */*.c */*/*.c -o philo
