@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 11:52:22 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:31:51 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	*monitoring(t_broadcasted_info *info)
 
 	philos = info->philos;
 	data = info->data;
-	while (!info->death_flag)
+	safe_set_start_flag(philos);
+	while (!safe_get_death_flag(philos))
 	{
 		// bq4 h4444di, m4hdk h4d1n1 rb1 34t1n1
 		// death of a philo
@@ -30,13 +31,21 @@ void	*monitoring(t_broadcasted_info *info)
 		while (++i < data.philos_num)
 		{
 			if (is_dead(philos[i], data))
-				return (safe_print(&philos[i], "died"), info->death_flag = 1, NULL);
+			{
+				safe_print(&philos[i], "died");
+				safe_set_death_flag(philos);
+				return (NULL);
+			}
 			if (philos[i].meals_num < data.times_to_eat)
 				all_ate = 0;
 		}
 		// everyone ate n times
 		if (all_ate && data.times_to_eat != -1)
-			return (info->death_flag = 1, NULL);
+			return (safe_set_death_flag(philos), NULL);
+		ft_sleep(50);
 	}
+	i = -1;
+	while (++i < data.philos_num)
+		pthread_join(philos[i].thread, NULL);
 	return (NULL);
 }

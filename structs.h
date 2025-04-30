@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 08:42:36 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:39:46 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,12 @@ typedef struct s_arg
 typedef struct s_broadcasted_info
 {
 	struct s_philo	*philos;
+	mutex			*forks;
 	t_my_data		data;
 	int				death_flag;
+	mutex			death_mutex;
+	int				start_flag;
+	mutex			start_mutex;
 	mutex			printing_mutex;
 }					t_broadcasted_info;
 

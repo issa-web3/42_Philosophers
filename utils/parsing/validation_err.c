@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 09:39:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/29 10:45:20 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:25:54 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	validation_err(void)
 	write(2, "\tc: time_to_eat (ms)\n", 22);
 	write(2, "\td: time_to_sleep (ms)\n", 24);
 	write(2, "\te: number_of_times_each_philosopher_must_eat\n", 46);
-	write(2, "All arguments must be positive integers !!!\n", 44);
+	write(2, "All arguments must be positive NON-NULL integers !!!\n", 53);
 	return (EXIT_FAILURE);
 }
