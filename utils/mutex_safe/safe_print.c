@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   safe_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 13:16:06 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:50:57 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
-void	*routine(void *ptr)
+void	safe_print(t_philo *philo, char *action)
 {
-	t_philo				*self;
 	t_broadcasted_info	*info;
 
-	self = (t_philo *)ptr;
-	info = self->info;
-	if (self->id % 2 == 0)
-		ft_sleep(1000);
-	while (!info->death_flag)
-	{
-		if (self->meals_num < info->data.times_to_eat || info->data.times_to_eat == -1)
-			eat(self);
-		zzz(self);
-		think(self);
-	}
-	return (NULL);
+	info = philo->info;
+	pthread_mutex_lock(&info->printing_mutex);
+	printf("%ld %d %s\n", get_time_now(), philo->id, action);
+	pthread_mutex_unlock(&info->printing_mutex);
 }

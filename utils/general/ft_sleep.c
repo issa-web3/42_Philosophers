@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   ft_sleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 13:16:06 by ioulkhir         ###   ########.fr       */
+/*   Created: 2024/10/22 08:41:55 by ioulkhir          #+#    #+#             */
+/*   Updated: 2025/04/30 11:53:24 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
-void	*routine(void *ptr)
+void	ft_sleep(long duration)
 {
-	t_philo				*self;
-	t_broadcasted_info	*info;
+	long	then;
 
-	self = (t_philo *)ptr;
-	info = self->info;
-	if (self->id % 2 == 0)
-		ft_sleep(1000);
-	while (!info->death_flag)
-	{
-		if (self->meals_num < info->data.times_to_eat || info->data.times_to_eat == -1)
-			eat(self);
-		zzz(self);
-		think(self);
-	}
-	return (NULL);
+	then = get_time_now();
+	while (get_time_now() < then + duration)
+		usleep(50);
 }

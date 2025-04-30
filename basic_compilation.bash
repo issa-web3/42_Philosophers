@@ -1,2 +1,4 @@
 $FLAGS = -Wall -Wextra -Werror
-cc $FLAGS *.c */*.c */*/*.c -g -fsanitize=address -o philo
+$LEAKS = -g -fsanitize=address
+$LEAKS = 
+cc $FLAGS *.c */*.c */*/*.c $LEAKS -o philo

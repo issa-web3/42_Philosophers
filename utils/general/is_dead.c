@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   what_time_is_it.c                                  :+:      :+:    :+:   */
+/*   is_dead.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 08:41:55 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/29 15:10:00 by ioulkhir         ###   ########.fr       */
+/*   Created: 2025/04/29 15:15:59 by ioulkhir          #+#    #+#             */
+/*   Updated: 2025/04/30 11:50:57 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
-int	what_time_is_it()
+int	is_dead(t_philo philo, t_my_data data)
 {
-	struct timeval tv;
+	long	time_now;
+	long	hunger_duration;
 
-	if (gettimeofday(&tv, NULL) != 0)
-		return (-1);
-	return (tv.tv_usec);
+	time_now = get_time_now();
+	hunger_duration = time_now - philo.last_time_eaten;
+	return (hunger_duration > data.time_to_die);
 }

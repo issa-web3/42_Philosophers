@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   get_time_now.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 13:16:06 by ioulkhir         ###   ########.fr       */
+/*   Created: 2024/10/22 08:41:55 by ioulkhir          #+#    #+#             */
+/*   Updated: 2025/04/30 08:47:01 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
-void	*routine(void *ptr)
+long	first_time()
 {
-	t_philo				*self;
-	t_broadcasted_info	*info;
+	static long		time;
+	struct timeval	tv;
 
-	self = (t_philo *)ptr;
-	info = self->info;
-	if (self->id % 2 == 0)
-		ft_sleep(1000);
-	while (!info->death_flag)
-	{
-		if (self->meals_num < info->data.times_to_eat || info->data.times_to_eat == -1)
-			eat(self);
-		zzz(self);
-		think(self);
-	}
-	return (NULL);
+	if (time)
+		return (time);
+	if (gettimeofday(&tv, NULL) != 0)
+		return (-1);
+	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (time);
+}
+
+long	get_time_now(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) != 0)
+		return (-1);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000) - first_time());
 }
