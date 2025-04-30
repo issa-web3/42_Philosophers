@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 15:42:48 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:48:58 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ int	create_philos(t_broadcasted_info *info)
 	fail = 0;
 	while (++i < data.philos_num && !fail)
 	{
-		// init philo
 		philos[i].id = i + 1;
 		philos[i].info = info;
 		philos[i].last_time_eaten = get_time_now();
 		philos[i].meals_num = 0;
 		philos[i].eating_fork = &forks[i];
-		pthread_mutex_init(philos[i].eating_fork, NULL);
-		// ...
+		fail |= pthread_mutex_init(philos[i].eating_fork, NULL);
 		fail |= pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
 	}
 	return (fail);
@@ -59,7 +57,7 @@ int	start_simulation(t_my_data data)
 	info.forks = forks;
 	info.data = data;
 	if (create_philos(&info) != 0)
-		return (EXIT_FAILURE);
+		return (free(philos), free(forks), EXIT_FAILURE);
 	monitoring(&info);
 	return (EXIT_SUCCESS);
 }
