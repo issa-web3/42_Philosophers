@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 11:52:05 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:25:35 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ void	zzz(t_philo *philo)
 	ft_sleep(data.time_to_sleep);
 }
 
+void	sort_mutexes(mutex **m1, mutex **m2)
+{
+	mutex	*tmp;
+
+	// fix the order issue
+	if (*m1 > *m2)
+	{
+		tmp = *m1;
+		*m1 = *m2;
+		*m2 = tmp;
+	}
+}
+
 void	eat(t_philo *philo)
 {
 	t_broadcasted_info	*info;
@@ -39,15 +52,16 @@ void	eat(t_philo *philo)
 	philos = info->philos;
 	data = info->data;
 	philos_num = data.philos_num;
-	r_fork = (philos + philo->id - 1)->eating_fork;
-	l_fork = (philos + (philo->id % philos_num))->eating_fork;
+	r_fork = &(philos + philo->id - 1)->eating_fork;
+	l_fork = &(philos + (philo->id % philos_num))->eating_fork;
+	sort_mutexes(&r_fork, &l_fork);
 	pthread_mutex_lock(r_fork);
 	safe_print(philo, "taken a fork");
 	pthread_mutex_lock(l_fork);
 	safe_print(philo, "taken a fork");
 	safe_print(philo, "is eating");
-	philo->last_time_eaten = get_time_now();
-	philo->meals_num++;
+	safe_set_time_eaten(philo);
+	safe_inc_start_flag(philo);
 	ft_sleep(data.time_to_eat);
 	pthread_mutex_unlock(r_fork);
 	pthread_mutex_unlock(l_fork);

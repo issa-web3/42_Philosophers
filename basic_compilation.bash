@@ -1,4 +1,5 @@
 FLAGS="-Wall -Wextra -Werror"
 LEAKS="-g -fsanitize=address"
+LEAKS=""
 FLAGS=""
-cc $FLAGS $LEAKS *.c */*.c */*/*.c -o philo
+cc  *.c */*/*.c -g -fsanitize=thread -o philo

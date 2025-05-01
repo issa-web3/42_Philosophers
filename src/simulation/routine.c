@@ -6,14 +6,19 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/01 07:43:53 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:40:43 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
-int	can_eat(int eaten_n, long max)
+static int	can_eat(t_philo *self, t_broadcasted_info *info)
 {
+	int	eaten_n;
+	int	max;
+
+	eaten_n = safe_get_meals_num(self);
+	max = info->data.times_to_eat;
 	return (eaten_n < max || max == -1);
 }
 
@@ -30,7 +35,7 @@ void	*routine(void *ptr)
 		usleep(100);
 	while (!safe_get_death_flag(self))
 	{
-		if (can_eat(self->meals_num, info->data.times_to_eat))
+		if (can_eat(self, info))
 			eat(self);
 		zzz(self);
 		think(self);

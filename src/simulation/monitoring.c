@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 15:56:12 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:03:54 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*monitoring(t_broadcasted_info *info)
 				safe_set_death_flag(philos);
 				return (NULL);
 			}
-			if (philos[i].meals_num < data.times_to_eat)
+			if (safe_get_meals_num(&philos[i]) < data.times_to_eat)
 				all_ate = 0;
 		}
 		// everyone ate n times

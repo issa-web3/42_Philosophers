@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 15:39:46 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:09:45 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_arg
 typedef struct s_broadcasted_info
 {
 	struct s_philo	*philos;
-	mutex			*forks;
 	t_my_data		data;
 	int				death_flag;
 	mutex			death_mutex;
@@ -51,9 +50,11 @@ typedef struct s_broadcasted_info
 typedef struct s_philo
 {
 	int					id;
+	pthread_t			thread;
 	long				last_time_eaten;
 	int					meals_num;
-	pthread_t			thread;
-	mutex				*eating_fork;
+	mutex				last_time_eaten_mutex;
+	mutex				meals_num_mutex;
+	mutex				eating_fork;
 	t_broadcasted_info	*info;
 }				t_philo;
