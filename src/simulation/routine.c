@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 15:19:53 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/01 07:19:58 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*routine(void *ptr)
 	while (!safe_get_start_flag(self))
 		usleep(100);
 	if (self->id % 2 == 0)
-		ft_sleep(100);
+		usleep(100);
 	while (!safe_get_death_flag(self))
 	{
 		if (self->meals_num < info->data.times_to_eat || info->data.times_to_eat == -1)

@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 15:48:58 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/01 07:17:50 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	start_simulation(t_my_data data)
 		return (free(philos), EXIT_FAILURE);
 	info.start_flag = 0;
 	info.death_flag = 0;
-	pthread_mutex_init(&info.printing_mutex, NULL);
 	info.philos = philos;
 	info.forks = forks;
 	info.data = data;
+	pthread_mutex_init(&info.printing_mutex, NULL);
 	if (create_philos(&info) != 0)
 		return (free(philos), free(forks), EXIT_FAILURE);
 	monitoring(&info);

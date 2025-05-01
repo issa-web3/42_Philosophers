@@ -8,7 +8,6 @@ parsing plan:
     init()
     done
 
-me ---> DELTA
 
 DELTA:
     learn thread function
@@ -16,8 +15,10 @@ DELTA:
 GAMMA:
     project idea and foundation
 
-TAO & LAMDA
+me ---> TAO & LAMDA
 
+TAO:
+    philosopher never die ?
 
 
 
