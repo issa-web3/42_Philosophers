@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/01 10:09:45 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:37:58 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ typedef struct s_broadcasted_info
 {
 	struct s_philo	*philos;
 	t_my_data		data;
+	int				fail;
 	int				death_flag;
 	mutex			death_mutex;
 	int				start_flag;
 	mutex			start_mutex;
 	mutex			printing_mutex;
+	mutex			fail_mutex;
 }					t_broadcasted_info;
 
 typedef struct s_philo

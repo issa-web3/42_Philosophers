@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/01 10:03:54 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:36:07 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	*monitoring(t_broadcasted_info *info)
 			return (safe_set_death_flag(philos), NULL);
 		usleep(10 * 1000);
 	}
-	i = -1;
-	while (++i < data.philos_num)
-		pthread_join(philos[i].thread, NULL);
+	// i = thread_join(philos[i].thread, NULL);
+	destroy_all(info);
 	return (NULL);
 }
