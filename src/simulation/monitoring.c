@@ -6,19 +6,21 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/01 11:36:07 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:49:46 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
-void	*monitoring(t_broadcasted_info *info)
+void	*monitoring(void *ptr)
 {
-	t_philo		*philos;
-	t_my_data	data;
-	int			all_ate;
-	int			i;
+	t_broadcasted_info *info;
+	t_philo				*philos;
+	t_my_data			data;
+	int					all_ate;
+	int					i;
 
+	info = (t_broadcasted_info *)ptr;
 	philos = info->philos;
 	data = info->data;
 	safe_set_start_flag(philos);

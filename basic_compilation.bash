@@ -3,4 +3,4 @@ LEAKS="-g -fsanitize=address"
 THREADS="-g -fsanitize=thread"
 LEAKS=""
 # FLAGS=""
-cc $FLAGS *.c */*/*.c -o philo
+cc $THREADS *.c */*/*.c -o philo

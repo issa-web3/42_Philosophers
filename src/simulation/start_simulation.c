@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/01 11:54:05 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:32:53 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	create_philos(t_broadcasted_info *info)
 		pthread_mutex_init(&philos[i].last_time_eaten_mutex, NULL);
 		pthread_mutex_init(&philos[i].eating_fork, NULL);
 		fail |= pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
+		// fail |= !fail && pthread_detach(philos[i].thread);
 	}
 	return (fail);
 }
@@ -49,7 +50,7 @@ void	destroy_all(t_broadcasted_info *info)
 	safe_set_fail_flag(philos);
 	while (++i < data.philos_num)
 	{
-		pthread_join(philos[i].thread, NULL);
+		// pthread_join(philos[i].thread, NULL);
 		pthread_mutex_destroy(&philos[i].eating_fork);
 		pthread_mutex_destroy(&philos[i].meals_num_mutex);
 		pthread_mutex_destroy(&philos[i].last_time_eaten_mutex);
@@ -63,6 +64,7 @@ int	start_simulation(t_my_data data)
 {
 	t_philo				*philos;
 	t_broadcasted_info	info;
+	pthread_t			monitor;
 
 	philos = malloc(data.philos_num * sizeof(t_philo));
 	if (philos == NULL)
@@ -78,6 +80,12 @@ int	start_simulation(t_my_data data)
 	pthread_mutex_init(&info.death_mutex, NULL);
 	if (create_philos(&info) != 0)
 		return (destroy_all(&info), EXIT_FAILURE);
-	monitoring(&info);
+	
+	pthread_create(&monitor, NULL, monitoring, &info);
+	pthread_join(monitor, NULL);
+	int i;
+	i = -1;
+	while (++i < data.philos_num)
+		pthread_join(philos[i].thread, NULL);
 	return (EXIT_SUCCESS);
 }

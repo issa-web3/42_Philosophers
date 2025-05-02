@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/01 10:25:35 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:53:09 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	zzz(t_philo *philo)
 
 	data = philo->info->data;
 	safe_print(philo, "is sleeping");
-	ft_sleep(data.time_to_sleep);
+	ft_sleep(philo, data.time_to_sleep);
 }
 
 void	sort_mutexes(mutex **m1, mutex **m2)
@@ -57,12 +57,21 @@ void	eat(t_philo *philo)
 	sort_mutexes(&r_fork, &l_fork);
 	pthread_mutex_lock(r_fork);
 	safe_print(philo, "taken a fork");
+	
+	if (r_fork == l_fork)
+	{
+		pthread_mutex_unlock(r_fork);
+		ft_sleep(philo, data.time_to_die);
+		safe_print(philo, "died");
+		safe_set_death_flag(philo);
+		return ;
+	}
 	pthread_mutex_lock(l_fork);
 	safe_print(philo, "taken a fork");
 	safe_print(philo, "is eating");
 	safe_set_time_eaten(philo);
 	safe_inc_start_flag(philo);
-	ft_sleep(data.time_to_eat);
+	ft_sleep(philo, data.time_to_eat);
 	pthread_mutex_unlock(r_fork);
 	pthread_mutex_unlock(l_fork);
 }
