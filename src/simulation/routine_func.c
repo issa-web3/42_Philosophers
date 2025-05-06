@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/02 13:53:09 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:57:26 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	eat(t_philo *philo)
 	safe_print(philo, "taken a fork");
 	safe_print(philo, "is eating");
 	safe_set_time_eaten(philo);
-	safe_inc_start_flag(philo);
+	safe_inc_meals_num(philo);
+	safe_inc_total_meals_num(philo);
 	ft_sleep(philo, data.time_to_eat);
 	pthread_mutex_unlock(r_fork);
 	pthread_mutex_unlock(l_fork);

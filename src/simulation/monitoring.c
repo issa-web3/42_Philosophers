@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/02 13:49:46 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:21:17 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	*monitoring(void *ptr)
 		{
 			if (is_dead(philos[i], data))
 			{
+				safe_set_death_flag(&philos[i]);
 				safe_print(&philos[i], "died");
-				safe_set_death_flag(philos);
 				return (NULL);
 			}
 			if (safe_get_meals_num(&philos[i]) < data.times_to_eat)
@@ -44,7 +44,7 @@ void	*monitoring(void *ptr)
 		// everyone ate n times
 		if (all_ate && data.times_to_eat != -1)
 			return (safe_set_death_flag(philos), NULL);
-		usleep(10 * 1000);
+		usleep(10);
 	}
 	// i = thread_join(philos[i].thread, NULL);
 	destroy_all(info);

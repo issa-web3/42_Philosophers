@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:15:59 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/01 10:13:57 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:19:06 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ int	is_dead(t_philo philo, t_my_data data)
 
 	time_now = get_time_now();
 	hunger_duration = time_now - safe_get_time_eaten(&philo);
-	return (hunger_duration > data.time_to_die);
+	return (hunger_duration >= data.time_to_die);
 }

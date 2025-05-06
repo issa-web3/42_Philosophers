@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/02 13:39:05 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:57:48 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void			safe_set_death_flag(t_philo *philo);
 int				safe_get_start_flag(t_philo *philo);
 void			safe_set_start_flag(t_philo *philo);
 int				safe_get_meals_num(t_philo *philo);
-void			safe_inc_start_flag(t_philo *philo);
+int				safe_get_total_meals_num(t_philo *philo);
+void			safe_inc_total_meals_num(t_philo *philo);
+void			safe_inc_meals_num(t_philo *philo);
 int				safe_get_time_eaten(t_philo *philo);
 void			safe_set_time_eaten(t_philo *philo);
 int				safe_get_fail_flag(t_philo *philo);

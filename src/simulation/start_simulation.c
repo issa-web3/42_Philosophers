@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/06 11:03:02 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:06:25 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	destroy_all(t_broadcasted_info *info)
 	pthread_mutex_destroy(&info->death_mutex);
 	pthread_mutex_destroy(&info->start_mutex);
 	pthread_mutex_destroy(&info->printing_mutex);
+	pthread_mutex_destroy(&info->total_meals_mtx);
 }
 
 int	start_simulation(t_my_data data)
@@ -69,8 +70,10 @@ int	start_simulation(t_my_data data)
 	info.death_flag = 0;
 	info.data = data;
 	info.fail = 0;
+	info.total_meals_num = 0;
 	pthread_mutex_init(&info.fail_mutex, NULL);
 	pthread_mutex_init(&info.printing_mutex, NULL);
+	pthread_mutex_init(&info.total_meals_mtx, NULL);
 	pthread_mutex_init(&info.start_mutex, NULL);
 	pthread_mutex_init(&info.death_mutex, NULL);
 	if (create_philos(&info) != 0)
