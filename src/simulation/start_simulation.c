@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/02 13:32:53 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:03:02 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,11 @@ void	destroy_all(t_broadcasted_info *info)
 
 int	start_simulation(t_my_data data)
 {
-	t_philo				*philos;
 	t_broadcasted_info	info;
 	pthread_t			monitor;
 
-	philos = malloc(data.philos_num * sizeof(t_philo));
-	if (philos == NULL)
-		return (EXIT_FAILURE);
 	info.start_flag = 0;
 	info.death_flag = 0;
-	info.philos = philos;
 	info.data = data;
 	info.fail = 0;
 	pthread_mutex_init(&info.fail_mutex, NULL);
@@ -86,6 +81,6 @@ int	start_simulation(t_my_data data)
 	int i;
 	i = -1;
 	while (++i < data.philos_num)
-		pthread_join(philos[i].thread, NULL);
+		pthread_join(info.philos[i].thread, NULL);
 	return (EXIT_SUCCESS);
 }

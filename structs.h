@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/01 11:37:58 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:02:42 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <sys/time.h>
 
 typedef pthread_mutex_t mutex;
+# define MAX_PHILO_NUM 200
 
 // Structs
 typedef struct s_my_data
@@ -36,9 +37,21 @@ typedef struct s_arg
 	char		valid;
 }				t_arg;
 
+typedef struct s_philo
+{
+	int							id;
+	pthread_t					thread;
+	long						last_time_eaten;
+	int							meals_num;
+	mutex						last_time_eaten_mutex;
+	mutex						meals_num_mutex;
+	mutex						eating_fork;
+	struct s_broadcasted_info	*info;
+}				t_philo;
+
 typedef struct s_broadcasted_info
 {
-	struct s_philo	*philos;
+	t_philo			philos[MAX_PHILO_NUM];
 	t_my_data		data;
 	int				fail;
 	int				death_flag;
@@ -48,15 +61,3 @@ typedef struct s_broadcasted_info
 	mutex			printing_mutex;
 	mutex			fail_mutex;
 }					t_broadcasted_info;
-
-typedef struct s_philo
-{
-	int					id;
-	pthread_t			thread;
-	long				last_time_eaten;
-	int					meals_num;
-	mutex				last_time_eaten_mutex;
-	mutex				meals_num_mutex;
-	mutex				eating_fork;
-	t_broadcasted_info	*info;
-}				t_philo;
