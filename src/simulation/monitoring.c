@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 19:57:25 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:18:08 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		death_or_all_eaten(t_broadcasted_info *info)
 		if (dad_or_alive(&philos[i], info->data))
 			return (print_action(&philos[i], "died"), YES);
 		all_eaten &= eaten_enough(&philos[i], info->data);
+		usleep(10);
 		i++;
 	}
 	return (all_eaten);
