@@ -6,7 +6,7 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 16:03:17 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 17:22:20 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // general utils
 int				ft_isdigit(int c);
 long			get_time_now(void);
-int				is_dead(t_philo philo, t_my_data data);
 void			ft_sleep(t_philo *philo, long duration);
 
 // Parsing functions
@@ -26,17 +25,21 @@ int				validation_err(void);
 // simulation
 int				init(t_broadcasted_info *info);
 int				start_simulation(t_broadcasted_info *info);
+void			end_simulation(t_broadcasted_info *info);
 void			*routine(void *ptr);
-void	        *shinigami_routine(void *ptr);
 void			wait_start_flag(t_broadcasted_info *info);
 void			eating(t_philo *self);
 void	        thinking(t_philo *self);
 void	        sleeping(t_philo *self);
 
+// SHINIGAMI
+void	        *shinigami_routine(void *ptr);
+int		        death_or_all_eaten(t_broadcasted_info *info);
+int				dad_or_alive(t_philo *philo, t_my_data data);
+int				eaten_enough(t_philo *philo, t_my_data data);
+
 // safe functions 
-int				safe_getter_setter(t_general_flag *flag, char action, int new_val);
-void			set_to_yes(void *ptr);
-void			increment(void *ptr);
+long			safe_getter_setter(t_general_flag *flag, char action, long new_val);
 void			print_action(t_philo *self, char *action);
 
 // clean up

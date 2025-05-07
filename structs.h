@@ -6,7 +6,7 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 15:58:28 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 16:47:52 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,21 @@ typedef struct s_arg
 	char		valid;
 }				t_arg;
 
+typedef struct s_general_flag
+{
+	mutex		mtx;
+	long		value;
+}				t_general_flag;
+
 typedef struct s_philo
 {
 	int							id;
 	pthread_t					thread;
 	mutex						eating_fork;
+	t_general_flag				meals_num;
+	t_general_flag				last_time_eaten;
 	struct s_broadcasted_info	*info;
 }				t_philo;
-
-typedef struct s_general_flag
-{
-	mutex		mtx;
-	char		value;
-	void		(*change_func)(void *);
-}				t_general_flag;
 
 typedef struct s_broadcasted_info
 {

@@ -6,7 +6,7 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 15:39:27 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 16:58:10 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ void	*shinigami_routine(void *ptr)
 	wait_start_flag(info);
 	while (safe_getter_setter(&info->death, GET, 314) == NOT_YET)
 	{
-		// routine
 		// B9A_7ADI{m47dk_h4d1n1_rb1_34t1n1}
-		
-		
+		if (death_or_all_eaten(info))
+			end_simulation(info);
 	}
 	return (NULL);
 }

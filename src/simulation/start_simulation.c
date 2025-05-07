@@ -6,7 +6,7 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 16:07:54 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 17:10:46 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ static void	init_mtx(t_broadcasted_info *info)
 {
 	pthread_mutex_init(&info->death.mtx, NULL);
 	info->death.value = NOT_YET;
-	info->death.change_func = set_to_yes;
 	pthread_mutex_init(&info->start.mtx, NULL);
 	info->start.value = NOT_YET;
-	info->start.change_func = set_to_yes;
 	pthread_mutex_init(&info->printing, NULL);
 }
 
@@ -37,8 +35,12 @@ int	init(t_broadcasted_info *info)
 	{
 		info->philos[i].id = i + 1;
 		info->philos[i].info = info;
-		fail = pthread_create(&info->philos[i].thread, NULL, routine, &info->philos[i]) != 0;
+		info->philos[i].meals_num.value = 0;
+		info->philos[i].last_time_eaten.value = get_time_now();
 		pthread_mutex_init(&info->philos[i].eating_fork, NULL) != 0;
+		pthread_mutex_init(&info->philos[i].meals_num.mtx, NULL) != 0;
+		pthread_mutex_init(&info->philos[i].last_time_eaten.mtx, NULL) != 0;
+		fail = pthread_create(&info->philos[i].thread, NULL, routine, &info->philos[i]) != 0;
 		i++;
 	}
 	fail |= !fail && pthread_create(&info->shinigami, NULL, shinigami_routine, info) != 0;
@@ -47,7 +49,9 @@ int	init(t_broadcasted_info *info)
 	while (j < i - 1)
 	{
 		pthread_detach(info->philos[j].thread);
-		pthread_mutex_destroy(&info->philos[j++].eating_fork);
+		pthread_mutex_destroy(&info->philos[j].eating_fork);
+		pthread_mutex_destroy(&info->philos[j].meals_num.mtx);
+		j++;
 	}
 	pthread_mutex_destroy(&info->death.mtx);
 	pthread_mutex_destroy(&info->start.mtx);
@@ -67,6 +71,7 @@ int	start_simulation(t_broadcasted_info *info)
 	{
 		pthread_join(info->philos[i].thread, NULL);
 		pthread_mutex_destroy(&info->philos[i].eating_fork);
+		pthread_mutex_destroy(&info->philos[i].meals_num.mtx);
 	}
 	// end_simulation(info);
 	return (EXIT_FAILURE);
@@ -74,5 +79,5 @@ int	start_simulation(t_broadcasted_info *info)
 
 void	end_simulation(t_broadcasted_info *info)
 {
-	
+	safe_getter_setter(&info->death, SET, YES);
 }
