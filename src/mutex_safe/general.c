@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   general.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 17:21:56 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 20:03:00 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ long	safe_getter_setter(t_general_flag *flag, char action, long new_val)
 
 void	print_action(t_philo *self, char *action)
 {
+	static int	cant_print;
+
 	pthread_mutex_lock(&self->info->printing);
-	printf("%ld %d %s\n", get_time_now(), self->id, action);
+	if (!cant_print)
+		printf("%ld %d %s\n", get_time_now(), self->id, action);
+	cant_print |= *action == 'd';
 	pthread_mutex_unlock(&self->info->printing);
 }

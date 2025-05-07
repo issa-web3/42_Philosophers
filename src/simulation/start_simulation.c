@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_simulation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 17:10:46 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 20:00:29 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	init(t_broadcasted_info *info)
 		info->philos[i].info = info;
 		info->philos[i].meals_num.value = 0;
 		info->philos[i].last_time_eaten.value = get_time_now();
-		pthread_mutex_init(&info->philos[i].eating_fork, NULL) != 0;
-		pthread_mutex_init(&info->philos[i].meals_num.mtx, NULL) != 0;
-		pthread_mutex_init(&info->philos[i].last_time_eaten.mtx, NULL) != 0;
+		pthread_mutex_init(&info->philos[i].eating_fork, NULL);
+		pthread_mutex_init(&info->philos[i].meals_num.mtx, NULL);
+		pthread_mutex_init(&info->philos[i].last_time_eaten.mtx, NULL);
 		fail = pthread_create(&info->philos[i].thread, NULL, routine, &info->philos[i]) != 0;
 		i++;
 	}

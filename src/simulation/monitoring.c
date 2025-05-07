@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 17:24:56 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 19:57:25 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		death_or_all_eaten(t_broadcasted_info *info)
 	while (i < info->data.philos_num)
 	{
 		if (dad_or_alive(&philos[i], info->data))
-			return (YES);
+			return (print_action(&philos[i], "died"), YES);
 		all_eaten &= eaten_enough(&philos[i], info->data);
 		i++;
 	}
