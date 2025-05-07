@@ -3,12 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   routine_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 11:17:59 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:28:28 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
+void	wait_start_flag(t_broadcasted_info *info)
+{
+	while (safe_getter_setter(&info->start, GET, 314) == NOT_YET)
+		usleep(100);
+}

@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   death_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 14:47:28 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 15:27:35 by test             ###   ########.fr       */
+/*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
+/*   Updated: 2025/05/07 15:24:07 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../../philo.h"
 
-int	main(int ac, char **av)
+int	safe_getter_setter(t_general_flag *flag, char action, int new_val)
 {
-	t_broadcasted_info	info;
-	int					status;
+	int	val;
 
-	info.data = parse_data(ac, av);
-	if (!info.data.is_valid)
-		return (validation_err());
-	status = init(&info);
-	if (status == EXIT_SUCCESS)
-	{
-		status = start_simulation(&info);
-	}
-	// status = status == EXIT_SUCCESS && start_simulation(&info);
-	return (status);
+	pthread_mutex_lock(&flag->mtx);
+	if (action == SET)
+		flag->value = new_val;
+	val = flag->value;
+	pthread_mutex_unlock(&flag->mtx);
+	return (val);
 }
