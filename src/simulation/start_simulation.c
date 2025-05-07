@@ -6,11 +6,22 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 15:27:52 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 16:07:54 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
+
+static void	init_mtx(t_broadcasted_info *info)
+{
+	pthread_mutex_init(&info->death.mtx, NULL);
+	info->death.value = NOT_YET;
+	info->death.change_func = set_to_yes;
+	pthread_mutex_init(&info->start.mtx, NULL);
+	info->start.value = NOT_YET;
+	info->start.change_func = set_to_yes;
+	pthread_mutex_init(&info->printing, NULL);
+}
 
 int	init(t_broadcasted_info *info)
 {
@@ -21,10 +32,7 @@ int	init(t_broadcasted_info *info)
 	i = 0;
 	j = 0;
 	fail = 0;
-	pthread_mutex_init(&info->death.mtx, NULL);
-	info->death.value = NOT_YET;
-	pthread_mutex_init(&info->start.mtx, NULL);
-	info->start.value = NOT_YET;
+	init_mtx(info);
 	while (i < info->data.philos_num && !fail)
 	{
 		info->philos[i].id = i + 1;
@@ -53,7 +61,6 @@ int	start_simulation(t_broadcasted_info *info)
 	int	i;
 
 	i = -1;
-	printf("i dont know what am doing here \n");
 	safe_getter_setter(&info->start, SET, YES);
 	pthread_join(info->shinigami, NULL);
 	while (++i < info->data.philos_num)

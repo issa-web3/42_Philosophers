@@ -6,7 +6,7 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 15:03:40 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 15:58:28 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_general_flag
 {
 	mutex		mtx;
 	char		value;
+	void		(*change_func)(void *);
 }				t_general_flag;
 
 typedef struct s_broadcasted_info
@@ -61,5 +62,6 @@ typedef struct s_broadcasted_info
 	pthread_t		shinigami;
 	t_general_flag	start;
 	t_general_flag	death;
+	mutex			printing;
 	t_my_data		data;
 }					t_broadcasted_info;

@@ -6,7 +6,7 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 15:32:05 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 15:39:27 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@ void	*routine(void *ptr)
 	self = ptr;
 	info = self->info;
 	wait_start_flag(info);
+	if (self->id % 2 == 0)
+		usleep(1000);
 	while (safe_getter_setter(&info->death, GET, 314) == NOT_YET)
 	{
 		// routine
-		printf("doing nothing %d\n", self->id);
+		eating(self);
+		sleeping(self);
+		thinking(self);
 	}
-	
 	return (NULL);
 }
 
@@ -39,8 +42,8 @@ void	*shinigami_routine(void *ptr)
 	{
 		// routine
 		// B9A_7ADI{m47dk_h4d1n1_rb1_34t1n1}
-		printf("doing nothing %d\n", 314);
+		
+		
 	}
-	
 	return (NULL);
 }
