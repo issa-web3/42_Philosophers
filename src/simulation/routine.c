@@ -6,7 +6,7 @@
 /*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 14:37:53 by test             ###   ########.fr       */
+/*   Updated: 2025/05/07 15:32:05 by test             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	*shinigami_routine(void *ptr)
 	while (safe_getter_setter(&info->death, GET, 314) == NOT_YET)
 	{
 		// routine
-		// b94_74d1{m47dk_h4d1n1_rb1_34t1n1}
+		// B9A_7ADI{m47dk_h4d1n1_rb1_34t1n1}
 		printf("doing nothing %d\n", 314);
 	}
 	
