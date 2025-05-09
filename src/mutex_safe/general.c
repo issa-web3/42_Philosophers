@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 20:03:00 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:26:06 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ long	safe_getter_setter(t_general_flag *flag, char action, long new_val)
 
 void	print_action(t_philo *self, char *action)
 {
-	static int	cant_print;
+	static int	death = NOT_YET;
 
 	pthread_mutex_lock(&self->info->printing);
-	if (!cant_print)
+	if (death == NOT_YET)
 		printf("%ld %d %s\n", get_time_now(), self->id, action);
-	cant_print |= *action == 'd';
-	pthread_mutex_unlock(&self->info->printing);
+	death |= *action == 'd';
+	if (death == NOT_YET)
+		pthread_mutex_unlock(&self->info->printing);
 }
