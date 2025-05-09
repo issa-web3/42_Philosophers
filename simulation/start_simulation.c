@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/09 17:42:18 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:20:29 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,6 @@ static void	handle_failure(t_broadcasted_info *info, long fail_pnt)
 	write(2, "thread creation failed !!!\n", 27);
 }
 
-void	sort_mutexes(mutex **m1, mutex **m2)
-{
-	mutex	*tmp;
-
-	if (*m1 > *m2)
-	{
-		tmp = *m1;
-		*m1 = *m2;
-		*m2 = tmp;
-	}
-}
-
 void	init_forks(t_broadcasted_info *info)
 {
 	t_philo	*curr;
@@ -66,7 +54,6 @@ void	init_forks(t_broadcasted_info *info)
 		curr = &philos[i++];
 		curr->r_fork = &curr->eating_fork;
 		curr->l_fork = &(philos + (curr->id % num))->eating_fork;
-		sort_mutexes(&curr->r_fork, &curr->l_fork);
 	}
 }
 
