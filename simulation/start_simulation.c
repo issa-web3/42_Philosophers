@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/09 16:28:42 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/09 17:42:18 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,37 @@ static void	handle_failure(t_broadcasted_info *info, long fail_pnt)
 	write(2, "thread creation failed !!!\n", 27);
 }
 
+void	sort_mutexes(mutex **m1, mutex **m2)
+{
+	mutex	*tmp;
+
+	if (*m1 > *m2)
+	{
+		tmp = *m1;
+		*m1 = *m2;
+		*m2 = tmp;
+	}
+}
+
+void	init_forks(t_broadcasted_info *info)
+{
+	t_philo	*curr;
+	t_philo	*philos;
+	long	i;
+	long	num;
+
+	i = 0;
+	philos = info->philos;
+	num = info->data.philos_num;
+	while (i < num)
+	{
+		curr = &philos[i++];
+		curr->r_fork = &curr->eating_fork;
+		curr->l_fork = &(philos + (curr->id % num))->eating_fork;
+		sort_mutexes(&curr->r_fork, &curr->l_fork);
+	}
+}
+
 int	init(t_broadcasted_info *info)
 {
 	int		fail;
@@ -63,9 +94,8 @@ int	init(t_broadcasted_info *info)
 	}
 	fail |= !fail && pthread_create(&info->shinigami, NULL, shinigami_routine, info) != 0;
 	if (!fail)
-		return (EXIT_SUCCESS);
-	handle_failure(info, i);
-	return (EXIT_FAILURE);
+		return (init_forks(info), EXIT_SUCCESS);
+	return (handle_failure(info, i), EXIT_FAILURE);
 }
 
 int	start_simulation(t_broadcasted_info *info)

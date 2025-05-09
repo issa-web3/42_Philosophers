@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/09 16:06:48 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:05:12 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,48 +18,26 @@ void	wait_start_flag(t_broadcasted_info *info)
 		usleep(100);
 }
 
-void	sort_mutexes(mutex **m1, mutex **m2)
-{
-	mutex	*tmp;
-
-	if (*m1 > *m2)
-	{
-		tmp = *m1;
-		*m1 = *m2;
-		*m2 = tmp;
-	}
-}
-
 void	eating(t_philo *self)
 {
-	mutex			*r_fork;
-	mutex			*l_fork;
-	t_philo			*philos;
-	long			num;
-
-	num = self->info->data.philos_num;
-	philos = self->info->philos;
-	r_fork = &self->eating_fork;
-	l_fork = &(philos + (self->id % num))->eating_fork;
-	sort_mutexes(&r_fork, &l_fork);
-	pthread_mutex_lock(r_fork);
+	pthread_mutex_lock(self->r_fork);
 	print_action(self, "has taken a fork");
-	if (r_fork == l_fork)
+	if (self->r_fork == self->l_fork)
 	{
-		pthread_mutex_unlock(r_fork);
+		pthread_mutex_unlock(self->r_fork);
 		ft_sleep(self, self->info->data.time_to_die);
 		return ;
 	}
-	pthread_mutex_lock(l_fork);
+	pthread_mutex_lock(self->l_fork);
 	print_action(self, "has taken a fork");
 	print_action(self, "is eating");
-	safe_getter_setter(&self->last_time_eaten, SET, get_time_now());
 	ft_sleep(self, self->info->data.time_to_eat);
+	pthread_mutex_unlock(self->r_fork);
+	pthread_mutex_unlock(self->l_fork);
+	safe_getter_setter(&self->last_time_eaten, SET, get_time_now());
 	safe_getter_setter(&self->meals_num, SET, 
 		safe_getter_setter(&self->meals_num, GET, 314) + 1
 	);
-	pthread_mutex_unlock(r_fork);
-	pthread_mutex_unlock(l_fork);
 }
 
 void	thinking(t_philo *self)

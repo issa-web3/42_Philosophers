@@ -4,7 +4,7 @@ NAME = philo
 # Compilation
 CC = cc
 COMPL_FLAGS = -Wall -Wextra -Werror
-LINK_FLAGS = -g3 -fsanitize=thread
+LINK_FLAGS = 
 # -g3 -fsanitize=thread
 
 COMPILE = $(CC) $(COMPL_FLAGS)

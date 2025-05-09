@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 16:47:52 by test             ###   ########.fr       */
+/*   Updated: 2025/05/09 17:31:31 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_philo
 	int							id;
 	pthread_t					thread;
 	mutex						eating_fork;
+	mutex						*l_fork;
+	mutex						*r_fork;
 	t_general_flag				meals_num;
 	t_general_flag				last_time_eaten;
 	struct s_broadcasted_info	*info;
