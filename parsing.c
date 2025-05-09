@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_arg.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:24:42 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 15:26:33 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:08:45 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../philo.h"
+#include "philo.h"
+
+t_my_data		parse_data(int ac, char **av)
+{
+	t_my_data	data;
+	t_arg		arg;
+	int			i;
+
+	i = 0;
+	data.is_valid = (ac == 5 || ac == 6);
+	data.times_to_eat = -1;
+	while (++i < ac)
+	{
+		arg = parse_arg(av[i]);
+		data.is_valid &= arg.valid;
+		((long *)&data.philos_num)[i - 1] = arg.val;
+	}
+	return (data);
+}
 
 t_arg			parse_arg(char *str)
 {
@@ -37,4 +55,17 @@ t_arg			parse_arg(char *str)
 	}
 	result.valid = str[i] == '\0' && result.val > 0;
 	return (result);
+}
+
+int	validation_err(void)
+{
+	write(2, "Invalid Usage !!\n", 17);
+	write(2, "Usage: ./philo a b c d [e]\n", 27);
+	write(2, "\ta: number_of_philosophers\n", 28);
+	write(2, "\tb: time_to_die (ms)\n", 21);
+	write(2, "\tc: time_to_eat (ms)\n", 22);
+	write(2, "\td: time_to_sleep (ms)\n", 24);
+	write(2, "\te: number_of_times_each_philosopher_must_eat\n", 46);
+	write(2, "All arguments must be positive NON-NULL integers !!!\n", 53);
+	return (EXIT_FAILURE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 17:22:20 by test             ###   ########.fr       */
+/*   Updated: 2025/05/09 16:11:38 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int				validation_err(void);
 // simulation
 int				init(t_broadcasted_info *info);
 int				start_simulation(t_broadcasted_info *info);
-void			end_simulation(t_broadcasted_info *info);
 void			*routine(void *ptr);
 void			wait_start_flag(t_broadcasted_info *info);
 void			eating(t_philo *self);
@@ -42,5 +41,3 @@ int				eaten_enough(t_philo *philo, t_my_data data);
 long			safe_getter_setter(t_general_flag *flag, char action, long new_val);
 void			print_action(t_philo *self, char *action);
 
-// clean up
-void			destroy_all(t_broadcasted_info *info);

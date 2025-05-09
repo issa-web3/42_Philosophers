@@ -6,11 +6,11 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/09 15:17:29 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:16:48 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../philo.h"
+#include "../philo.h"
 
 int	dad_or_alive(t_philo *philo, t_my_data data)
 {
@@ -34,6 +34,7 @@ int		death_or_all_eaten(t_broadcasted_info *info)
     int			i;
     int			all_eaten;
 
+	i = 0;
 	philos = info->philos;
 	all_eaten = info->data.times_to_eat != -1;
 	while (i < info->data.philos_num)

@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_time_now.c                                  :+:      :+:    :+:   */
+/*   ft_sleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 08:41:55 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/04/30 08:47:01 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/09 16:06:48 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../philo.h"
+#include "../philo.h"
 
-long	first_time()
+void	ft_sleep(t_philo *philo, long duration)
 {
-	static long		time;
-	struct timeval	tv;
+	long	then;
 
-	if (time)
-		return (time);
-	if (gettimeofday(&tv, NULL) != 0)
-		return (-1);
-	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
-	return (time);
-}
-
-long	get_time_now(void)
-{
-	struct timeval	tv;
-
-	if (gettimeofday(&tv, NULL) != 0)
-		return (-1);
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000) - first_time());
+	then = get_time_now();
+	while (get_time_now() < then + duration
+		&& safe_getter_setter(&philo->info->death, GET, 314) == NOT_YET)
+		usleep(100);
 }

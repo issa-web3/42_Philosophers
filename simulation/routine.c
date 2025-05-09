@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 16:58:10 by test             ###   ########.fr       */
+/*   Updated: 2025/05/09 16:11:49 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../philo.h"
+#include "../philo.h"
 
 void	*routine(void *ptr)
 {
@@ -42,7 +42,7 @@ void	*shinigami_routine(void *ptr)
 	{
 		// B9A_7ADI{m47dk_h4d1n1_rb1_34t1n1}
 		if (death_or_all_eaten(info))
-			end_simulation(info);
+			safe_getter_setter(&info->death, SET, YES);
 	}
 	return (NULL);
 }
