@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: test <test@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:28 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/07 15:27:35 by test             ###   ########.fr       */
+/*   Updated: 2025/05/10 11:18:11 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ int	main(int ac, char **av)
 		return (validation_err());
 	status = init(&info);
 	if (status == EXIT_SUCCESS)
-	{
 		status = start_simulation(&info);
-	}
-	// status = status == EXIT_SUCCESS && start_simulation(&info);
 	return (status);
 }

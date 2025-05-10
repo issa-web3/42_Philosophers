@@ -13,14 +13,13 @@ LINK = $(CC) $(LINK_FLAGS)
 
 # obj dirs
 OBJ_DIR = obj
-OBJ_DIRS = $(OBJ_DIR)/simulation $(OBJ_DIR)/utils
+OBJ_DIRS = $(OBJ_DIR)/simulation
 
 # INC
 INC = philo.h structs.h
 
 # SRC
-SRC = main.c mutex_safe.c parsing.c \
-	utils/ft_isdigit.c utils/ft_sleep.c utils/get_time_now.c \
+SRC = main.c mutex_safe.c parsing.c time_utils.c \
 	simulation/monitoring.c simulation/routine.c simulation/routine_func.c \
 	simulation/start_simulation.c
 

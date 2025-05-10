@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/09 17:31:31 by ioulkhir         ###   ########.fr       */
+/*   Created: 2025/05/10 11:08:27 by ioulkhir          #+#    #+#             */
+/*   Updated: 2025/05/10 11:15:40 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 #include <sys/time.h>
 
 typedef pthread_mutex_t mutex;
-# define MAX_PHILO_NUM 20000
-# define NOT_YET 0
-# define YES 1
-# define SET 13
-# define GET 37
+#define MAX_PHILO_NUM 200
+#define NOT_YET 0
+#define YES 1
+#define SET 13
+#define GET 37
 
 // Structs
 typedef struct s_my_data
@@ -67,4 +67,4 @@ typedef struct s_broadcasted_info
 	t_general_flag	death;
 	mutex			printing;
 	t_my_data		data;
-}					t_broadcasted_info;
+}				t_broadcasted_info;

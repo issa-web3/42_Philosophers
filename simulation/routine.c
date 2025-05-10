@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/09 16:11:49 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:05:59 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	*routine(void *ptr)
 		usleep(1000);
 	while (safe_getter_setter(&info->death, GET, 314) == NOT_YET)
 	{
-		// routine
 		eating(self);
 		sleeping(self);
 		thinking(self);
@@ -40,7 +39,6 @@ void	*shinigami_routine(void *ptr)
 	wait_start_flag(info);
 	while (safe_getter_setter(&info->death, GET, 314) == NOT_YET)
 	{
-		// B9A_7ADI{m47dk_h4d1n1_rb1_34t1n1}
 		if (death_or_all_eaten(info))
 			safe_getter_setter(&info->death, SET, YES);
 	}
