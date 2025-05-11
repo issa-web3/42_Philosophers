@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:24:42 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 13:06:25 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:36:29 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_my_data	parse_data(int ac, char **av)
 	{
 		arg = parse_arg(av[i]);
 		data.is_valid &= arg.valid;
-		((long *)&data.philos_num)[i - 1] = arg.val;
+		((long *)&data.philos_num)[i - 1] = arg.value;
 	}
 	data.is_valid &= data.philos_num <= MAX_PHILO_NUM;
 	return (data);
@@ -46,20 +46,20 @@ t_arg	parse_arg(char *str)
 		i++;
 	if (str[i] == '+')
 		i++;
-	result.val = 0;
+	result.value = 0;
 	result.valid = 1;
 	while (ft_isdigit(str[i]))
 	{
-		result.val *= 10;
-		result.val += str[i] - '0';
-		if (result.val > INT_MAX)
+		result.value *= 10;
+		result.value += str[i] - '0';
+		if (result.value > INT_MAX)
 		{
 			result.valid = 0;
 			break ;
 		}
 		i++;
 	}
-	if (str[i] || result.val <= 0)
+	if (str[i] || result.value <= 0)
 		result.valid = 0;
 	return (result);
 }

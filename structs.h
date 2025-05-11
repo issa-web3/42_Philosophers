@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:08:27 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 13:02:59 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:38:54 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_my_data
 
 typedef struct s_arg
 {
-	long		val;
+	long		value;
 	char		valid;
 }				t_arg;
 

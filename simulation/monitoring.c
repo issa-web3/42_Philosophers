@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 14:04:26 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:57:49 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ int	dad_or_alive(t_philo *philo, t_my_data data)
 	time_now = get_time_now();
 	hunger_duration = time_now;
 	hunger_duration -= safe_getter_setter(&philo->last_time_eaten, GET, 314);
-	return (hunger_duration >= data.time_to_die);
+	return (hunger_duration > data.time_to_die && !eaten_enough(philo, data));
 }
 
 int	eaten_enough(t_philo *philo, t_my_data data)
 {
 	return (data.times_to_eat
 		<= safe_getter_setter(&philo->meals_num, GET, 314)
+		&& data.times_to_eat != -1
 	);
 }
 
