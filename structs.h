@@ -6,23 +6,27 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 11:08:27 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/10 11:15:40 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:02:59 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <pthread.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <limits.h>
-#include <sys/time.h>
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-typedef pthread_mutex_t mutex;
-#define MAX_PHILO_NUM 200
-#define NOT_YET 0
-#define YES 1
-#define SET 13
-#define GET 37
+# include <stdio.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
+# include <sys/time.h>
+
+typedef pthread_mutex_t	t_mutex;
+
+# define MAX_PHILO_NUM 200
+# define NOT_YET 0
+# define YES 1
+# define SET 13
+# define GET 37
 
 // Structs
 typedef struct s_my_data
@@ -43,7 +47,7 @@ typedef struct s_arg
 
 typedef struct s_general_flag
 {
-	mutex		mtx;
+	t_mutex		mtx;
 	long		value;
 }				t_general_flag;
 
@@ -51,9 +55,9 @@ typedef struct s_philo
 {
 	int							id;
 	pthread_t					thread;
-	mutex						eating_fork;
-	mutex						*l_fork;
-	mutex						*r_fork;
+	t_mutex						eating_fork;
+	t_mutex						*l_fork;
+	t_mutex						*r_fork;
 	t_general_flag				meals_num;
 	t_general_flag				last_time_eaten;
 	struct s_broadcasted_info	*info;
@@ -65,6 +69,8 @@ typedef struct s_broadcasted_info
 	pthread_t		shinigami;
 	t_general_flag	start;
 	t_general_flag	death;
-	mutex			printing;
+	t_mutex			printing;
 	t_my_data		data;
 }				t_broadcasted_info;
+
+#endif
