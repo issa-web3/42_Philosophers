@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 13:54:30 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:02:56 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*routine(void *ptr)
 	info = self->info;
 	wait_start_flag(info);
 	if (self->id % 2 == 0)
-		usleep(100);
+		usleep(1000);
 	while (safe_getter_setter(&info->death, GET, 314) == NOT_YET)
 	{
 		eating(self);
