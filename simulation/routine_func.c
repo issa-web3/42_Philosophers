@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/10 11:21:07 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:48:06 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	eating(t_philo *self)
 	pthread_mutex_lock(self->l_fork);
 	print_action(self, "has taken a fork");
 	print_action(self, "is eating");
+	safe_getter_setter(&self->last_time_eaten, SET, get_time_now());
 	ft_sleep(self, self->info->data.time_to_eat);
 	pthread_mutex_unlock(self->r_fork);
 	pthread_mutex_unlock(self->l_fork);
-	safe_getter_setter(&self->last_time_eaten, SET, get_time_now());
 	safe_getter_setter(&self->meals_num, SET,
 		safe_getter_setter(&self->meals_num, GET, 314) + 1
 		);

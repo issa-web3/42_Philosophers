@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/10 11:05:12 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 13:44:07 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,19 @@ void	init_forks(t_broadcasted_info *info)
 	long	i;
 	long	num;
 
-	i = 0;
+	i = -1;
 	philos = info->philos;
 	num = info->data.philos_num;
-	while (i < num)
+	while (++i < num)
 	{
-		curr = &philos[i++];
+		curr = &philos[i];
 		curr->r_fork = &curr->eating_fork;
 		curr->l_fork = &(philos + (curr->id % num))->eating_fork;
+		if (i == num - 1)
+		{
+			curr->l_fork = &curr->eating_fork;
+			curr->r_fork = &(philos + (curr->id % num))->eating_fork;
+		}
 	}
 }
 
