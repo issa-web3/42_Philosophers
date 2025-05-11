@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 13:44:07 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:07:08 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,10 @@ int	start_simulation(t_broadcasted_info *info)
 	safe_getter_setter(&info->start, SET, YES);
 	pthread_join(info->shinigami, NULL);
 	while (++i < info->data.philos_num)
-	{
 		pthread_join(info->philos[i].thread, NULL);
+	i = -1;
+	while (++i < info->data.philos_num)
+	{
 		pthread_mutex_destroy(&info->philos[i].eating_fork);
 		pthread_mutex_destroy(&info->philos[i].meals_num.mtx);
 	}

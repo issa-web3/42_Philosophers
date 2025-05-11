@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 14:02:56 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/11 14:04:42 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*shinigami_routine(void *ptr)
 	{
 		if (death_or_all_eaten(info))
 			safe_getter_setter(&info->death, SET, YES);
-		usleep(1000);
+		usleep(10);
 	}
 	return (NULL);
 }
