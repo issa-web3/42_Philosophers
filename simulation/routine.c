@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 15:02:59 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:43:50 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	*routine(void *ptr)
 
 	self = ptr;
 	info = self->info;
-	wait_start_flag(info);
+	if (wait_start_flag(info) == YES)
+		return (NULL);
 	if (self->id % 2 == 0)
 		usleep(1000);
 	while (safe_getter_setter(&info->death, GET, 314) == NOT_YET)
@@ -38,7 +39,8 @@ void	*shinigami_routine(void *ptr)
 	t_broadcasted_info	*info;
 
 	info = ptr;
-	wait_start_flag(info);
+	if (wait_start_flag(info) == YES)
+		return (NULL);
 	while (safe_getter_setter(&info->death, GET, 314) == NOT_YET)
 	{
 		if (death_or_all_eaten(info))

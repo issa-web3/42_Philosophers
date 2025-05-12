@@ -6,16 +6,21 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 13:48:06 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:43:10 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	wait_start_flag(t_broadcasted_info *info)
+char	wait_start_flag(t_broadcasted_info *info)
 {
 	while (safe_getter_setter(&info->start, GET, 314) == NOT_YET)
+	{
+		if (safe_getter_setter(&info->death, GET, 314) == YES)
+			return (YES);
 		usleep(100);
+	}
+	return (NOT_YET);
 }
 
 void	eating(t_philo *self)

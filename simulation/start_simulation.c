@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 14:07:08 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:45:31 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	handle_failure(t_broadcasted_info *info, long fail_pnt)
 	i = 0;
 	while (i < fail_pnt - 1)
 	{
-		pthread_detach(info->philos[i].thread);
+		pthread_join(info->philos[i].thread, NULL);
 		pthread_mutex_destroy(&info->philos[i].eating_fork);
 		pthread_mutex_destroy(&info->philos[i].meals_num.mtx);
 		i++;
@@ -86,7 +86,7 @@ int	init(t_broadcasted_info *info)
 	fail = pthread_create(&info->shinigami, NULL, shinigami_routine, info) != 0;
 	if (!fail)
 		return (init_forks(info), EXIT_SUCCESS);
-	pthread_detach(info->shinigami);
+	pthread_join(info->shinigami, NULL);
 	return (handle_failure(info, i), EXIT_FAILURE);
 }
 

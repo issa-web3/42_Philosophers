@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:47:10 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/11 13:05:11 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:41:55 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int				validation_err(void);
 int				init(t_broadcasted_info *info);
 int				start_simulation(t_broadcasted_info *info);
 void			*routine(void *ptr);
-void			wait_start_flag(t_broadcasted_info *info);
+char			wait_start_flag(t_broadcasted_info *info);
 void			eating(t_philo *self);
 void			thinking(t_philo *self);
 void			sleeping(t_philo *self);
