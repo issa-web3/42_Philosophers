@@ -6,7 +6,7 @@
 /*   By: ioulkhir <ioulkhir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:57:38 by ioulkhir          #+#    #+#             */
-/*   Updated: 2025/05/12 16:45:31 by ioulkhir         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:47:37 by ioulkhir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	handle_failure(t_broadcasted_info *info, long fail_pnt)
 	long	i;
 
 	i = 0;
+	safe_getter_setter(&info->death, SET, YES);
 	while (i < fail_pnt - 1)
 	{
 		pthread_join(info->philos[i].thread, NULL);
